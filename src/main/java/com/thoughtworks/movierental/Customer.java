@@ -20,26 +20,47 @@ public class Customer {
     }
 
     public String statement() {
-        double totalAmount = 0;
-        int frequentRenterPoints = 0;
-        String result = "Rental Record for " + getName() + "\n";
-        for (Rental rental : rentals) {
-            double thisAmount = rental.amountFor();
-            frequentRenterPoints = rental.getFrequentRenterPoints(frequentRenterPoints);
+        return header() + body() + footer();
+    }
 
-            //show figures for this rental
-            result += "\t" + rental.getMovie().getTitle() + "\t" +
-                    thisAmount + "\n";
-            totalAmount += thisAmount;
-        }
+    private String footer() {
+        String result = "";
+        double totalAmount = getTotalAmount();
+        int frequentRenterPoints = getFrequentRenterPoints();
 
-        //add footer lines result
         result += "Amount owed is " + totalAmount + "\n";
         result += "You earned " + frequentRenterPoints
                 + " frequent renter points";
         return result;
     }
 
+    private String body() {
+        String result = "";
+        for (Rental rental : rentals) {
+            result += "\t" + rental.getMovie().getTitle() + "\t" +
+                    rental.amount() + "\n";
+        }
+        return result;
+    }
+
+    private int getFrequentRenterPoints() {
+        int frequentRenterPoints = 0;
+        for (Rental rental : rentals) {
+            frequentRenterPoints += rental.getFrequentRenterPoints();
+        }
+        return frequentRenterPoints;
+    }
+
+    private double getTotalAmount() {
+        double totalAmount = 0;
+        for (Rental rental : rentals) {
+            totalAmount += rental.amount();
+        }
+        return totalAmount;
+    }
+
+    private String header() {
+        return "Rental Record for " + getName() + "\n";
+    }
+
 }
-//1. Rename each to rental
-//2. Make

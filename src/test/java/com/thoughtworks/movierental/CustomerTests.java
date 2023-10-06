@@ -2,7 +2,7 @@ package com.thoughtworks.movierental;
 
 import org.junit.jupiter.api.Test;
 
-import static com.thoughtworks.movierental.Movie.*;
+import static com.thoughtworks.movierental.MoviePriceCode.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 //characterisation test
 class CustomerTest {
@@ -11,11 +11,11 @@ class CustomerTest {
     public void shouldReturnAmountWhenThreeReqularRentalsAreProvided() {
         int daysRented = 5;
         Customer batman = new Customer("batman");
-        batman.addRental(new Rental(new Movie("Movie-1", REGULAR), daysRented));
-        batman.addRental(new Rental(new Movie("Movie-2", REGULAR), 1));
-        batman.addRental(new Rental(new Movie("Movie-3", CHILDRENS), daysRented));
-        batman.addRental(new Rental(new Movie("Movie-4", CHILDRENS), 2));
-        batman.addRental(new Rental(new Movie("Movie-5", NEW_RELEASE), daysRented));
+        batman.addRental(new Rental(new Movie("Movie-1", REGULAR.ordinal()), daysRented));
+        batman.addRental(new Rental(new Movie("Movie-2", REGULAR.ordinal()), 1));
+        batman.addRental(new Rental(new Movie("Movie-3", CHILDRENS.ordinal()), daysRented));
+        batman.addRental(new Rental(new Movie("Movie-4", CHILDRENS.ordinal()), 2));
+        batman.addRental(new Rental(new Movie("Movie-5", NEW_RELEASE.ordinal()), daysRented));
 
         assertEquals("Rental Record for batman\n" +
                 "\tMovie-1\t6.5\n" +
