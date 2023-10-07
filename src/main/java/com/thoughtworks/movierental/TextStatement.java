@@ -1,17 +1,15 @@
 package com.thoughtworks.movierental;
 
-import java.util.List;
-
 class TextStatement {
 
     private final double totalAmount;
     private final int frequentRenterPoints;
     private final String name;
-    private final List<Rental> rentals;
+    private final CustomerRentals rentals;
 
-    public TextStatement(double totalAmount, int frequentRenterPoints, String name, List<Rental> rentals) {
-        this.totalAmount = totalAmount;
-        this.frequentRenterPoints = frequentRenterPoints;
+    public TextStatement(String name, CustomerRentals rentals) {
+        this.totalAmount = rentals.getTotalAmount();
+        this.frequentRenterPoints = rentals.getFrequentRenterPoints();
         this.name = name;
         this.rentals = rentals;
     }
@@ -26,7 +24,7 @@ class TextStatement {
 
     private String body() {
         String result = "";
-        for (Rental rental : rentals) {
+        for (Rental rental : rentals.getRentals()) {
             result += "\t" + rental.getMovie().getTitle() + "\t" +
                     rental.amount() + "\n";
         }
