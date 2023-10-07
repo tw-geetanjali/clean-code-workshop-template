@@ -20,27 +20,7 @@ public class Customer {
     }
 
     public String statement() {
-        return header() + body() + footer();
-    }
-
-    private String footer() {
-        String result = "";
-        double totalAmount = getTotalAmount();
-        int frequentRenterPoints = getFrequentRenterPoints();
-
-        result += "Amount owed is " + totalAmount + "\n";
-        result += "You earned " + frequentRenterPoints
-                + " frequent renter points";
-        return result;
-    }
-
-    private String body() {
-        String result = "";
-        for (Rental rental : rentals) {
-            result += "\t" + rental.getMovie().getTitle() + "\t" +
-                    rental.amount() + "\n";
-        }
-        return result;
+        return new TextStatement(getTotalAmount(), getFrequentRenterPoints(), name, rentals).generate();
     }
 
     private int getFrequentRenterPoints() {
@@ -59,36 +39,8 @@ public class Customer {
         return totalAmount;
     }
 
-    private String header() {
-        return "Rental Record for " + getName() + "\n";
-    }
-
     public String htmlStatement() {
-        return htmlHeader() + htmlBody() + htmlFooter();
-    }
-
-    private String htmlFooter() {
-        String result = "";
-        double totalAmount = getTotalAmount();
-        int frequentRenterPoints = getFrequentRenterPoints();
-
-        result += "Amount owed is <b>" + totalAmount + "</b><br>";
-        result += "You earned <b>" + frequentRenterPoints
-                + "</b> frequent renter points";
-        return result;
-    }
-
-    private String htmlBody() {
-        String result = "";
-        for (Rental rental : rentals) {
-            result += rental.getMovie().getTitle() +
-                    rental.amount() + "<br>";
-        }
-        return result;
-    }
-
-    private String htmlHeader() {
-        return "<h1>Rental Record for <b>" + getName() + "</b> </h1> <br>";
+        return new HtmlStatement(getTotalAmount(), getFrequentRenterPoints(), rentals, name).generate();
     }
 
 }
