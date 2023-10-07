@@ -25,4 +25,8 @@ public class CustomerRentals {
     public List<Rental> getRentals() {
         return rentals;
     }
+
+    public void add(Rental rental) {
+        rentals.add(rental);
+    }
 }

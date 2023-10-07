@@ -10,7 +10,7 @@ public class Customer {
     }
 
     public void addRental(Rental rental) {
-        rentals.getRentals().add(rental); //feature envy
+        rentals.add(rental);
     }
 
     public String getName() {
