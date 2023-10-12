@@ -2,11 +2,10 @@ package com.thoughtworks.movierental;
 
 public class Customer {
     private final String name;
-    private final CustomerRentals rentals;
+    private final CustomerRentals rentals = new CustomerRentals();
 
     public Customer(String name) {
         this.name = name;
-        rentals = new CustomerRentals();
     }
 
     public void addRental(Rental rental) {
